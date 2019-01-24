@@ -1,5 +1,9 @@
 class Rover {
-  constructor ({ location, direction }) {
+  constructor (config) {
+    if (typeof config !== 'object') {
+      throw new Error('must provide a config to create rover')
+    }
+    const { location, direction } = config
     if (!location || typeof direction === 'undefined') {
       throw new Error('rover must have location and direction')
     }
@@ -28,7 +32,8 @@ class Rover {
     }
     this.direction = (this.direction + direction + 4) % 4
   }
-  move () {
+  move (config) {
+    const { reverse } = config || {}
     // moving left means [x, y] -> [x-1, y]
     // moving right means [x, y] -> [x+1, y]
     // moving up means [x, y] -> [x, y+1]
@@ -37,12 +42,12 @@ class Rover {
     if (this.direction % 2 === 0) {
       // if we are facing north or south
       // translate 0, 2 into -1, 1
-      let offset = this.direction - 1
+      let offset = (this.direction - 1) * (reverse ? -1 : 1)
       nextLocation = [this.location[0], this.location[1] - offset]
     } else {
       // if we are facing west or east
       // translate 1 or 3 into -1, 1
-      let offset = this.direction - 2
+      let offset = (this.direction - 2) * (reverse ? -1 : 1)
       nextLocation = [this.location[0] - offset, this.location[1]]
     }
     if (nextLocation.some(n => n < 0)) {
