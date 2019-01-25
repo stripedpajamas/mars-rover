@@ -12,6 +12,10 @@ describe('RoverController', () => {
     it('should require a config object', () => {
       assert.throws(() => new RoverController(), 'must provide a config to create controller')
     })
+    it('should require positive height and width', () => {
+      assert.throws(() => new RoverController({ dimensions: [-1, 2] }), 'width and height must be positive')
+      assert.throws(() => new RoverController({ dimensions: [1, -2] }), 'width and height must be positive')
+    })
   })
   describe('#isValidLocation', () => {
     let controller
@@ -49,10 +53,11 @@ describe('RoverController', () => {
       controller = new RoverController({ dimensions: [5, 5] })
     })
     it('should remove a rover', () => {
-      let id = controller.addRover([0, 0], 0)
+      controller.addRover([0, 0], 0)
+      controller.addRover([1, 2], 0)
+      assert.strictEqual(controller.rovers.length, 2)
+      controller.removeRover(1)
       assert.strictEqual(controller.rovers.length, 1)
-      controller.removeRover(id)
-      assert.strictEqual(controller.rovers.length, 0)
     })
     it('should only remove rovers with valid ids', () => {
       assert.throws(() => controller.removeRover(1), 'invalid rover id')

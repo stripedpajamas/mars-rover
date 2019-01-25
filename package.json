@@ -5,7 +5,9 @@
     "lint": "standard",
     "test": "nyc mocha test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prompts": "^2.0.1"
+  },
   "devDependencies": {
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",

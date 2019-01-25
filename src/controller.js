@@ -6,6 +6,9 @@ class RoverController {
       throw new Error('must provide a config to create controller')
     }
     const { dimensions } = config
+    if (dimensions.some(x => x < 0)) {
+      throw new Error('width and height must be positive')
+    }
     this.dimensions = dimensions
     this.rovers = []
   }
@@ -21,7 +24,7 @@ class RoverController {
     if (id < 0 || id >= this.rovers.length) {
       throw new Error('invalid rover id')
     }
-    this.rovers.splice(id)
+    this.rovers.splice(id, 1)
   }
   runCommands (id, commands) {
     if (id < 0 || id >= this.rovers.length) {
