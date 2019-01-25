@@ -1,4 +1,14 @@
+/**
+ *Rovers can rotate and move
+ *
+ * @class Rover
+ */
 class Rover {
+  /**
+   *Creates an instance of Rover
+   * @param {object} config that contains location [x, y] and direction
+   * @memberof Rover
+   */
   constructor (config) {
     if (typeof config !== 'object') {
       throw new Error('must provide a config to create rover')
@@ -23,6 +33,12 @@ class Rover {
     this.direction = direction % 4
     this.location = location
   }
+  /**
+   *Rotates a rover 90 degrees left or right
+   *
+   * @param {number} direction 1 for 90 degrees, -1 for -90 degrees
+   * @memberof Rover
+   */
   rotate (direction) {
     if (!Number.isInteger(direction)) {
       throw new Error('integer direction to rotate is required')
@@ -32,6 +48,12 @@ class Rover {
     }
     this.direction = (this.direction + direction + 4) % 4
   }
+  /**
+   *Moves a rover one unit in its current direction
+   *
+   * @param {object} config with optional reverse parameter
+   * @memberof Rover
+   */
   move (config) {
     const { reverse } = config || {}
     // moving left means [x, y] -> [x-1, y]
