@@ -1,5 +1,8 @@
 {
   "name": "mars-rover",
+  "description": "a small ui for managing mars rovers",
+  "repository": {},
+  "license": "MIT",
   "version": "0.1.0",
   "scripts": {
     "start": "node index.js",

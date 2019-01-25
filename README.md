@@ -1,11 +1,10 @@
 # mars rovers
 
 ## how to run
-
-### manual setup
 - install [Node & NPM](https://nodejs.org) >= 9
 - install dependencies by running `npm install` in this directory
 - start CLI by running `npm start` in this directory
+- run tests by running `npm test` in this directory
 
 ## project structure
 
