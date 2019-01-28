@@ -147,7 +147,7 @@ class ManualInterface extends UserInterface {
       } catch (e) {
         this.dimensions = null
         this.controller = null
-        this.error(e, this.menu)
+        return this.error(e, this.menu)
       }
     }
     const { value } = await prompts({
@@ -235,6 +235,7 @@ class ManualInterface extends UserInterface {
 }
 
 module.exports = {
+  UserInterface,
   FileInterface,
   ManualInterface
 }
