@@ -10,11 +10,11 @@ describe('RoverController', () => {
       assert.deepStrictEqual(controller.dimensions, [5, 5])
     })
     it('should require a config object', () => {
-      assert.throws(() => new RoverController(), 'must provide a config to create controller')
+      assert.throws(() => new RoverController(), /must provide a config to create controller/)
     })
     it('should require positive height and width', () => {
-      assert.throws(() => new RoverController({ dimensions: [-1, 2] }), 'width and height must be positive')
-      assert.throws(() => new RoverController({ dimensions: [1, -2] }), 'width and height must be positive')
+      assert.throws(() => new RoverController({ dimensions: [-1, 2] }), /width and height must be positive/)
+      assert.throws(() => new RoverController({ dimensions: [1, -2] }), /width and height must be positive/)
     })
   })
   describe('#isValidLocation', () => {
@@ -44,7 +44,7 @@ describe('RoverController', () => {
       assert.strictEqual(controller.rovers[id] instanceof Rover, true)
     })
     it('should only add rovers with valid locations', () => {
-      assert.throws(() => controller.addRover([-1, 1]), 'invalid initial location for rover')
+      assert.throws(() => controller.addRover([-1, 1]), /invalid initial location for rover/)
     })
   })
   describe('#removeRover', () => {
@@ -60,7 +60,7 @@ describe('RoverController', () => {
       assert.strictEqual(controller.rovers.length, 1)
     })
     it('should only remove rovers with valid ids', () => {
-      assert.throws(() => controller.removeRover(1), 'invalid rover id')
+      assert.throws(() => controller.removeRover(1), /invalid rover id/)
     })
   })
   describe('#runCommands', () => {
@@ -71,14 +71,14 @@ describe('RoverController', () => {
       controller.addRover([1, 4], 3)
     })
     it('should not allow invalid rover ids', () => {
-      assert.throws(() => controller.runCommands(3, []), 'invalid rover id')
+      assert.throws(() => controller.runCommands(3, []), /invalid rover id/)
     })
     it('should not allow invalid commands', () => {
       let commands = [
         { command: 'move' },
         { command: 'lift' }
       ]
-      assert.throws(() => controller.runCommands(0, commands), 'invalid rover command')
+      assert.throws(() => controller.runCommands(0, commands), /invalid rover command/)
     })
     it('should run the commands on the specified rover', () => {
       let commands = [
@@ -97,7 +97,7 @@ describe('RoverController', () => {
       let { location, direction } = controller.runCommands(1, commands)
       assert.deepStrictEqual(location, [1, 5])
       assert.strictEqual(direction, 0)
-      assert.throws(() => controller.runCommands(1, [{ command: 'move' }]), 'cannot move off plateau')
+      assert.throws(() => controller.runCommands(1, [{ command: 'move' }]), /cannot move off plateau/)
       assert.deepStrictEqual(location, [1, 5]) // have not moved
     })
   })

@@ -20,10 +20,10 @@ describe('utilities', () => {
       ])
     })
     it('should not allow invalid commands in the string', () => {
-      assert.throws(() => util.parseCommands('LRX'), 'invalid command string')
+      assert.throws(() => util.parseCommands('LRX'), /invalid command string/)
     })
     it('should only allow strings as input', () => {
-      assert.throws(() => util.parseCommands({}), 'command string must be a string')
+      assert.throws(() => util.parseCommands({}), /command string must be a string/)
     })
   })
   describe('parsePlateau', () => {
@@ -32,13 +32,13 @@ describe('utilities', () => {
       assert.deepStrictEqual(plateau, [5, 5])
     })
     it('should only allow a 2d plateau', () => {
-      assert.throws(() => util.parsePlateau('5 4 5'), 'invalid plateau dimensions')
+      assert.throws(() => util.parsePlateau('5 4 5'), /invalid plateau dimensions/)
     })
     it('should not allow negative dimensions', () => {
-      assert.throws(() => util.parsePlateau('5 -4'), 'invalid plateau dimensions')
+      assert.throws(() => util.parsePlateau('5 -4'), /invalid plateau dimensions/)
     })
     it('should only allow strings as input', () => {
-      assert.throws(() => util.parsePlateau({}), 'plateau input must be a string')
+      assert.throws(() => util.parsePlateau({}), /plateau input must be a string/)
     })
   })
   describe('parseRover', () => {
@@ -51,7 +51,7 @@ describe('utilities', () => {
       assert.throws(() => util.parseRover('1 1 X'))
     })
     it('should only allow strings as input', () => {
-      assert.throws(() => util.parseRover({}), 'rover input must be a string')
+      assert.throws(() => util.parseRover({}), /rover input must be a string/)
     })
   })
   describe('parseFile', () => {
